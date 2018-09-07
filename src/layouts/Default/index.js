@@ -1,16 +1,13 @@
 import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
+
+import { Header } from './components'
 
 export default Page =>
   class extends Component {
     render() {
       return (
         <Fragment>
-          <h1>Layout Default</h1>
-
-          <ul>
-            <li><Link to="/login">Login</Link></li>
-          </ul>
+          <Header />
 
           <Page {...this.props} />
         </Fragment>
