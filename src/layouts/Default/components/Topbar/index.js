@@ -23,15 +23,6 @@ const Topbar = () => (
             </a>
           </li>
 
-          <li className="hide-phone">
-            <form className="app-search">
-              <input type="text" placeholder="Search..." className="form-control" />
-              <button type="submit">
-                <i className="fa fa-search" />
-              </button>
-            </form>
-          </li>
-
           <li>
             <div className="notification-box">
               <ul className="list-inline mb-0">
@@ -49,10 +40,10 @@ const Topbar = () => (
           </li>
 
           <li className="dropdown notification-list">
-            <Link to="/" className="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown">
+            <Link to="/" className="nav-link dropdown-toggle nav-user" data-toggle="dropdown">
               <img src="assets/images/users/avatar-1.jpg" alt="user" className="rounded-circle" />
             </Link>
-            <div className="dropdown-menu dropdown-menu-right profile-dropdown ">
+            <div className="dropdown-menu dropdown-menu-right">
               <Link to="/" className="dropdown-item notify-item">
                 <i className="ti-user m-r-5" /> Profile
               </Link>

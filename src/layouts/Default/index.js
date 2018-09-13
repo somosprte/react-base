@@ -1,15 +1,20 @@
 import React, { Component, Fragment } from 'react';
 
-import { Header } from './components'
+import { Topbar, Navbar, Footer } from './components'
 
 export default Page =>
   class extends Component {
     render() {
       return (
         <Fragment>
-          <Header />
+          <header id="topnav">
+            <Topbar />
+            <Navbar />
+          </header>
 
           <Page {...this.props} />
+
+          <Footer />
         </Fragment>
       );
     }

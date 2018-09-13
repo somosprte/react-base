@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 
 import 'config/ReactotronConfig';
+import 'assets/scss/styles.scss';
 
 import store from 'store';
 import Router from 'routes';
