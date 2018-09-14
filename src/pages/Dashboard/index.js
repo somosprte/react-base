@@ -1,11 +1,32 @@
 import React, { Component } from 'react';
 
-import { withLayout } from 'hocs';
+import { Page, Panel, Button } from 'components';
 
 class Dashboard extends Component {
   render() {
-    return <h2>Bem vindo ao dashboard</h2>;
+    return (
+      <Page>
+        <Page.Title>Dados da Zôdio</Page.Title>
+        <Panel>váerias informações</Panel>
+
+        <Page.Title>Resumos</Page.Title>
+        <div className="row">
+          <div className="col-4">
+            <Panel>váerias informações</Panel>
+          </div>
+
+          <div className="col-4">
+            <Panel>váerias informações</Panel>
+          </div>
+          <div className="col-4">
+            <Panel>váerias informações</Panel>
+          </div>
+        </div>
+
+        <Button type="success">Entrar em contato</Button>
+      </Page>
+    );
   }
 }
 
-export default withLayout()(Dashboard);
+export default Dashboard;

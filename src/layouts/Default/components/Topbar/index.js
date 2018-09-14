@@ -1,13 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import LogoSmall from 'assets/images/logo-sm.png';
+import Logo from 'assets/images/logo.png';
+import AvatarExample from 'assets/images/users/avatar-1.jpg';
+
 const Topbar = () => (
   <div className="topbar-main">
     <div className="container-fluid">
       <div className="logo">
         <Link to="/" className="logo">
-          <img src="assets/images/logo-sm.png" alt="" height="26" className="logo-small" />
-          <img src="assets/images/logo.png" alt="" height="24" className="logo-large" />
+          <img src={LogoSmall} alt="" height="26" className="logo-small" />
+          <img src={Logo} alt="" height="24" className="logo-large" />
         </Link>
       </div>
 
@@ -41,7 +45,7 @@ const Topbar = () => (
 
           <li className="dropdown notification-list">
             <Link to="/" className="nav-link dropdown-toggle nav-user" data-toggle="dropdown">
-              <img src="assets/images/users/avatar-1.jpg" alt="user" className="rounded-circle" />
+              <img src={AvatarExample} alt="user" className="rounded-circle" />
             </Link>
             <div className="dropdown-menu dropdown-menu-right">
               <Link to="/" className="dropdown-item notify-item">

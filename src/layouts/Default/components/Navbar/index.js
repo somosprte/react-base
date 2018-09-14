@@ -1,55 +1,87 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-const Navbar = () => (
-  <div className="navbar-custom">
-    <div className="container-fluid">
-      <div id="navigation">
-        <ul className="navigation-menu">
-          <li className="has-submenu">
-            <Link to="/">
-              <i className="mdi mdi-view-dashboard" />
-              <span>Dashboard</span>
-            </Link>
-          </li>
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Creators as AuthActions } from 'store/ducks/auth';
 
-          <li className="has-submenu">
-            <Link to="/">
-              <i className="mdi mdi-invert-colors" />
-              <span>Telas</span>
-            </Link>
+import { Button } from 'components';
 
-            <ul className="submenu megamenu">
+class Navbar extends Component {
+  handleLogout = () => {
+    this.props.logoutRequest();
+  };
+
+  render() {
+    return (
+      <div className="navbar-custom">
+        <div className="container-fluid">
+          <div id="navigation">
+            <ul className="navigation-menu">
+              <li className="has-submenu">
+                <Link to="/">
+                  <i className="mdi mdi-view-dashboard" />
+                  <span>Dashboard</span>
+                </Link>
+              </li>
+
               <li>
-                <ul>
+                <Link to="/products">
+                  {/* <i className="mdi mdi-" */}
+                  <span>Produtos</span>
+                </Link>
+              </li>
+
+              <li className="has-submenu">
+                <Link to="/">
+                  <i className="mdi mdi-invert-colors" />
+                  <span>Telas</span>
+                </Link>
+
+                <ul className="submenu megamenu">
                   <li>
-                    <Link to="/login">Login</Link>
+                    <ul>
+                      <li>
+                        <Link to="/login">Login</Link>
+                      </li>
+                      <li>
+                        <Link to="/">Register</Link>
+                      </li>
+                      <li>
+                        <Link to="/">Forgot Password</Link>
+                      </li>
+                    </ul>
                   </li>
+
                   <li>
-                    <Link to="/">Register</Link>
-                  </li>
-                  <li>
-                    <Link to="/">Forgot Password</Link>
+                    <ul>
+                      <li>
+                        <Link to="/">Tables</Link>
+                      </li>
+                      <li>
+                        <Link to="/">Charts</Link>
+                      </li>
+                    </ul>
                   </li>
                 </ul>
               </li>
 
               <li>
-                <ul>
-                  <li>
-                    <Link to="/">Tables</Link>
-                  </li>
-                  <li>
-                    <Link to="/">Charts</Link>
-                  </li>
-                </ul>
+                <Button onClick={this.handleLogout}>
+                  <span>Logout</span>
+                </Button>
               </li>
             </ul>
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-);
+    );
+  }
+}
 
-export default Navbar;
+const mapActions = dispatch => bindActionCreators(AuthActions, dispatch);
+
+export default connect(
+  null,
+  mapActions,
+)(Navbar);

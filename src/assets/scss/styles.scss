@@ -4,5 +4,15 @@
  */
 @import 'theme/style';
 
+/**
+ * Default styles
+ */
 @import 'variables';
+@import 'pages';
+@import 'animations';
+
+
+/**
+ * Pages
+ */
 @import 'pages/login';

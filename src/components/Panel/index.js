@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-class Container extends Component {
+class Panel extends Component {
   render() {
     return <div className="card-box">{this.props.children}</div>;
   }
 }
 
-export default Container;
+export default Panel;

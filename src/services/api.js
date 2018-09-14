@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: '',
+  baseURL: 'https://api.egregora.app/',
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',

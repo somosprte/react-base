@@ -1,4 +1,5 @@
 import validate from 'validate.js';
+import CPF from 'gerador-validador-cpf';
 
 /**
  * Custom validators messages.
@@ -6,6 +7,10 @@ import validate from 'validate.js';
 validate.validators.presence.options = { message: '^Este campo é obrigatório.' };
 validate.validators.email.options = { message: '^Insira um e-mail válido.' };
 validate.validators.length.options = { tooShort: '^Este campo exige no mínimo %{count} caracteres.' };
+
+validate.validators.cpf = (value, options, key, attributes) => {
+  if (!CPF.validate(value)) return '^Insira um CPF válido';
+};
 
 export default function(attributes, rules) {
   const errors = validate(attributes, rules);
