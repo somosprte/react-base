@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Creators as UsersActions } from 'store/ducks/users';
+import { Creators as UsersActions, Selectors as UsersSelectors } from 'store/ducks/users';
 
 import { Page, Panel, Loading, Button, Pagination } from 'components';
 
@@ -44,20 +44,18 @@ class List extends Component {
               <thead>
                 <tr>
                   <th />
-                  <th>Nome</th>
-                  <th>Sobrenome</th>
+                  <th>Nome Completo</th>
                   <th />
                 </tr>
               </thead>
 
               <tbody>
-                {this.props.users.data.map(user => (
+                {this.props.usersList.map(user => (
                   <tr key={user.id}>
                     <td width="30">
-                      <img src={user.avatar} alt={user.first_name} className="rounded-circle" width="30" />
+                      <img src={user.avatar} alt={user.fullname} className="rounded-circle" width="30" />
                     </td>
-                    <td>{user.first_name}</td>
-                    <td>{user.last_name}</td>
+                    <td>{user.fullname}</td>
                     <td align="right">
                       <Link to={`/users/${user.id}/edit`} className="btn btn-primary btn-sm m-r-5">
                         Editar
@@ -82,6 +80,7 @@ class List extends Component {
 
 const mapState = state => ({
   users: state.users,
+  usersList: UsersSelectors.all(state),
 });
 
 const mapActions = dispatch => bindActionCreators(UsersActions, dispatch);

@@ -1,3 +1,5 @@
+import { createSelector } from 'reselect';
+
 export const Types = {
   GET_REQUEST: 'users/GET_REQUEST',
   GET_SUCCESS: 'users/GET_SUCCESS',
@@ -192,4 +194,15 @@ export const Creators = {
   editUserFailure: () => ({
     type: Types.EDIT_FAILURE,
   }),
+};
+
+export const Selectors = {
+  all: createSelector(
+    state => state.users.data,
+    users =>
+      users.map(user => ({
+        ...user,
+        fullname: `${user.first_name} ${user.last_name}`,
+      })),
+  ),
 };

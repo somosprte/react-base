@@ -6,7 +6,7 @@ class Dashboard extends Component {
   render() {
     return (
       <Page>
-        <Page.Title>Dados da Zôdio</Page.Title>
+        <Page.Title id="page-title-tour">Dados da Zôdio</Page.Title>
         <Panel>váerias informações</Panel>
 
         <Page.Title>Resumos</Page.Title>

@@ -21,7 +21,7 @@ class Topbar extends Component {
     return (
       <div className="topbar-main">
         <div className="container-fluid">
-          <div className="logo">
+          <div className="logo" id="logo-tour">
             <Link to="/" className="logo">
               <img src={LogoSmall} alt="" height="26" className="logo-small" />
               <img src={Logo} alt="" height="24" className="logo-large" />
