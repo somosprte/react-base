@@ -73,7 +73,6 @@ export default function users(state = initialState, action) {
         loading: true,
       };
     case Types.GET_LIST_SUCCESS:
-      console.log(action.payload.users);
       return {
         ...state,
         loading: false,

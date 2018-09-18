@@ -23,11 +23,10 @@ class Pagination extends Component {
     return `${url}?page=${page}`;
   };
 
-
   render() {
     return (
       this.props.total > 1 && (
-        <ul {...this.props} className={`pagination pagination-split ${this.props.className}`}>
+        <ul className={`pagination pagination-split ${this.props.className}`}>
           {Array.from({ length: this.props.total }).map((value, index) => (
             <li className={`page-item ${this.props.current === index + 1 ? 'active' : ''}`} key={index}>
               <Link to={this.handlePageUrl(index + 1)} className="page-link">
