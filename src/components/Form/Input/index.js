@@ -5,7 +5,7 @@ class Input extends Component {
   static defaultProps = {
     errors: null,
     mask: null,
-    focus: false,
+    focus: 0,
   };
 
   state = {

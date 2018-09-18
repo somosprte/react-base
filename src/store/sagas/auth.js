@@ -5,21 +5,9 @@ import api from 'services/api';
 
 import { Creators as AuthActions, Types as AuthTypes } from 'store/ducks/auth';
 
-function* authenticateRequest(action) {
-  try {
-    const url = `people/person/cpf/${action.payload.document}`;
-    const response = yield call(api.get, url);
-
-    yield put(AuthActions.authenticateSuccess(response.data, action.payload.document));
-  } catch (error) {
-    yield call(swal, 'Ops, algo deu errado', 'Não foi possível autenticar seu CPF', 'error');
-    yield put(AuthActions.authenticateFailure());
-  }
-}
-
 function* loginRequest(action) {
   try {
-    const url = 'auth/users/login';
+    const url = 'login';
     const response = yield call(api.post, url, action.payload.credentials);
 
     localStorage.setItem('auth_token', response.data.jwt);
@@ -35,7 +23,7 @@ function* loginRequest(action) {
 
 function* getAuthUserRequest(action) {
   try {
-    const url = 'people/person/me';
+    const url = 'users/2';
     const response = yield call(api.get, url);
 
     yield put(AuthActions.getAuthUserSuccess(response.data));
@@ -57,7 +45,6 @@ function* logoutRequest(action) {
 }
 
 export default function* sagaAuth() {
-  yield takeLatest(AuthTypes.AUTHENTICATE_REQUEST, authenticateRequest);
   yield takeLatest(AuthTypes.LOGIN_REQUEST, loginRequest);
   yield takeLatest(AuthTypes.LOGOUT_REQUEST, logoutRequest);
   yield takeLatest(AuthTypes.GET_USER_REQUEST, getAuthUserRequest);

@@ -1,8 +1,4 @@
 export const Types = {
-  AUTHENTICATE_REQUEST: 'auth/AUTHENTICATE_REQUEST',
-  AUTHENTICATE_SUCCESS: 'auth/AUTHENTICATE_SUCCESS',
-  AUTHENTICATE_FAILURE: 'auth/AUTHENTICATE_FAILURE',
-
   LOGIN_REQUEST: 'auth/LOGIN_REQUEST',
   LOGIN_SUCCESS: 'auth/LOGIN_SUCCESS',
   LOGIN_FAILURE: 'auth/LOGIN_FAILURE',
@@ -17,12 +13,6 @@ export const Types = {
 };
 
 const initialState = {
-  authenticate: {
-    data: {},
-    document: null,
-    loading: false,
-  },
-
   login: {
     loading: false,
   },
@@ -39,32 +29,6 @@ const initialState = {
 
 export default function auth(state = initialState, action) {
   switch (action.type) {
-    case Types.AUTHENTICATE_REQUEST:
-      return {
-        ...state,
-        authenticate: {
-          ...state.authenticate,
-          loading: true,
-        },
-      };
-    case Types.AUTHENTICATE_SUCCESS:
-      return {
-        ...state,
-        authenticate: {
-          ...state.authenticate,
-          loading: false,
-          data: action.payload.user.data,
-          document: action.payload.document,
-        },
-      };
-    case Types.AUTHENTICATE_FAILURE:
-      return {
-        ...state,
-        authenticate: {
-          ...state.authenticate,
-          loading: false,
-        },
-      };
     case Types.LOGIN_REQUEST:
       return {
         ...state,
@@ -79,10 +43,6 @@ export default function auth(state = initialState, action) {
         login: {
           ...state.login,
           loading: false,
-        },
-        authenticate: {
-          ...state.authenticate,
-          data: {},
         },
       };
     case Types.LOGIN_FAILURE:
@@ -148,20 +108,6 @@ export default function auth(state = initialState, action) {
 }
 
 export const Creators = {
-  authenticateRequest: document => ({
-    type: Types.AUTHENTICATE_REQUEST,
-    payload: { document },
-  }),
-
-  authenticateSuccess: (user, document) => ({
-    type: Types.AUTHENTICATE_SUCCESS,
-    payload: { user, document },
-  }),
-
-  authenticateFailure: () => ({
-    type: Types.AUTHENTICATE_FAILURE,
-  }),
-
   loginRequest: credentials => ({
     type: Types.LOGIN_REQUEST,
     payload: { credentials },

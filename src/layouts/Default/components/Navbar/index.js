@@ -1,17 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { Creators as AuthActions } from 'store/ducks/auth';
-
-import { Button } from 'components';
+import { Icon } from 'components';
 
 class Navbar extends Component {
-  handleLogout = () => {
-    this.props.logoutRequest();
-  };
-
   render() {
     return (
       <div className="navbar-custom">
@@ -21,55 +13,29 @@ class Navbar extends Component {
               <li className="has-submenu">
                 <Link to="/">
                   <i className="mdi mdi-view-dashboard" />
+                  <Icon name="tachometer" />
                   <span>Dashboard</span>
                 </Link>
               </li>
 
               <li>
-                <Link to="/products">
-                  {/* <i className="mdi mdi-" */}
-                  <span>Produtos</span>
+                <Link to="/users">
+                  <Icon name="users" />
+                  <span>Usuários</span>
                 </Link>
               </li>
 
               <li className="has-submenu">
                 <Link to="/">
-                  <i className="mdi mdi-invert-colors" />
-                  <span>Telas</span>
+                  <Icon name="flag" />
+                  <span>Exemplos</span>
                 </Link>
 
                 <ul className="submenu megamenu">
                   <li>
-                    <ul>
-                      <li>
-                        <Link to="/login">Login</Link>
-                      </li>
-                      <li>
-                        <Link to="/">Register</Link>
-                      </li>
-                      <li>
-                        <Link to="/">Forgot Password</Link>
-                      </li>
-                    </ul>
-                  </li>
-
-                  <li>
-                    <ul>
-                      <li>
-                        <Link to="/">Tables</Link>
-                      </li>
-                      <li>
-                        <Link to="/">Charts</Link>
-                      </li>
-                    </ul>
+                    <Link to="/examples/icons">Icones</Link>
                   </li>
                 </ul>
-              </li>
-
-              <li>
-                <Button onClick={this.handleLogout}>
-                  <span>Logout</span>
-                </Button>
               </li>
             </ul>
           </div>
@@ -79,9 +45,4 @@ class Navbar extends Component {
   }
 }
 
-const mapActions = dispatch => bindActionCreators(AuthActions, dispatch);
-
-export default connect(
-  null,
-  mapActions,
-)(Navbar);
+export default Navbar;

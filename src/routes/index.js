@@ -5,20 +5,25 @@ import { history } from './history';
 
 import * as Pages from 'pages';
 
-import PrivateRoute from './PrivateRoute';
+import { AuthRoute, PrivateRoute } from './components';
 
 const Routes = () => (
   <Router history={history}>
     <Switch>
       {/* <Route path="/" component={Pages.Dashboard} exact /> */}
-      <Route path="/login" component={Pages.Auth.Login} exact />
+      <AuthRoute path="/login" component={Pages.Auth.Login} exact />
 
       {/* Require authentication to access */}
       <PrivateRoute path="/" component={Pages.Dashboard} exact />
-      <PrivateRoute path="/products" component={Pages.Products.List} exact />
+      <PrivateRoute path="/users" component={Pages.Users.List} exact />
+      <PrivateRoute path="/users/create" component={Pages.Users.Create} exact />
+      <PrivateRoute path="/users/:id/edit" component={Pages.Users.Edit} exact />
+
+      <PrivateRoute path="/examples/icons" component={Pages.Examples.Icons} exact />
+
+      <Route component={Pages.Errors.NotFound} />
     </Switch>
   </Router>
 );
 
 export default Routes;
-
