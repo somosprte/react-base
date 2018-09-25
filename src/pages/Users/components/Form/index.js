@@ -22,7 +22,20 @@ class UserForm extends Component {
 
   render() {
     return (
-      <Form action="" className="form-horizontal p-20" onSubmit={this.handleSubmit}>
+      <Form action="" className="form form-horizontal p-20" onSubmit={this.handleSubmit}>
+        <Form.Group className="row">
+          <Form.Label className="col-2">Avatar</Form.Label>
+          <div className="col-10">
+            <Form.Input.Image
+              name="avatar"
+              type="avatar"
+              preview="https://africageographic.com/wp-content/uploads/2018/03/%C2%A9Benjamin_Ackerman_scotia_female_exeter.jpg"
+              value={this.state.data.avatar}
+              onChange={this.handleChangeInput}
+            />
+          </div>
+        </Form.Group>
+
         <Form.Group className="row">
           <Form.Label className="col-2">Nome Completo</Form.Label>
           <div className="col-10">
@@ -51,7 +64,7 @@ class UserForm extends Component {
         <Form.Group className="row justify-content-end">
           <div className="col-10">
             <Form.Button type="submit" disabled={this.props.submiting}>
-              {this.props.submiting ? <Loading /> : 'Salvar'}
+              {this.props.submiting ? <Loading type="btn" size="small" text="Salvando..." /> : 'Salvar'}
             </Form.Button>
           </div>
         </Form.Group>

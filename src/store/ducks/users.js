@@ -24,7 +24,7 @@ export const Types = {
 
 const initialState = {
   data: [],
-  loading: false,
+  loading: true,
   page: 1,
   totals: 1,
 
@@ -203,6 +203,7 @@ export const Selectors = {
       users.map(user => ({
         ...user,
         fullname: `${user.first_name} ${user.last_name}`,
+        active: false,
       })),
   ),
 };

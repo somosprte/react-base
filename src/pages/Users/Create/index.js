@@ -11,6 +11,7 @@ import { Form } from 'pages/Users/components';
 class Create extends Component {
   state = {
     data: {
+      avatar: '',
       name: '',
       job: '',
     },

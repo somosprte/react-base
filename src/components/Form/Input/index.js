@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import TextInputMask from 'react-masked-text';
 
+import Image from './Image';
+
 class Input extends Component {
   static defaultProps = {
     errors: null,
@@ -65,5 +67,7 @@ class Input extends Component {
     );
   }
 }
+
+Input.Image = Image;
 
 export default Input;

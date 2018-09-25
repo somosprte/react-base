@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { Creators as AuthActions } from 'store/ducks/auth';
 
 import { Validate } from 'common';
-import { Panel, Form, Loading } from 'components';
+import { Panel, Form, Loading, Icon } from 'components';
 
 class Login extends Component {
   state = {
@@ -57,53 +57,66 @@ class Login extends Component {
 
   render() {
     return (
-      <Panel>
-        <h4 className="text-uppercase font-bold mb-0 text-center">Login</h4>
-        <h5 className="mb-0 text-muted text-center">Conecte-se no Painel</h5>
-        <Form className="form-horizontal m-t-20 p-20" onSubmit={this.handleSubmit}>
-          <Form.Group>
-            <Form.Input
-              name="email"
-              placeholder="E-mail"
-              value={this.state.form.email}
-              onChange={this.handleChangeInput}
-              errors={this.state.errors.email}
-              focus={1}
-            />
-          </Form.Group>
+      <Fragment>
+        <Panel>
+          <h4 className="text-uppercase font-bold mb-0 text-center">Login</h4>
+          <h5 className="mb-0 text-muted text-center">Conecte-se no Painel</h5>
+          <Form className="form-horizontal m-t-20 p-20" onSubmit={this.handleSubmit}>
+            <Form.Group>
+              <Form.Input
+                name="email"
+                placeholder="E-mail"
+                value={this.state.form.email}
+                onChange={this.handleChangeInput}
+                errors={this.state.errors.email}
+                focus={1}
+              />
+            </Form.Group>
 
-          <Form.Group>
-            <Form.Input
-              type="password"
-              name="password"
-              placeholder="Senha"
-              value={this.state.form.password}
-              onChange={this.handleChangeInput}
-              errors={this.state.errors.password}
-            />
-          </Form.Group>
+            <Form.Group>
+              <Form.Input
+                type="password"
+                name="password"
+                placeholder="Senha"
+                value={this.state.form.password}
+                onChange={this.handleChangeInput}
+                errors={this.state.errors.password}
+              />
+            </Form.Group>
 
-          <Form.Group className="m-t-40">
-            <div className="row align-items-center">
-              <div className="col-6">
-                <Link to="/" className="text-primary">
-                  Criar Conta
-                </Link>
+            <Form.Group className="m-t-40">
+              <div className="row align-items-center">
+                <div className="col-6">
+                  <Link to="/register" className="text-primary">
+                    Criar Conta
+                  </Link>
+                </div>
+
+                <div className="col-6">
+                  <Form.Button
+                    className="btn btn-custom btn-block"
+                    type="submit"
+                    disabled={this.props.auth.login.loading}
+                  >
+                    {this.props.auth.login.loading ? (
+                      <Loading type="btn" size="small" text="Conectando..." />
+                    ) : (
+                      'Conectar'
+                    )}
+                  </Form.Button>
+                </div>
               </div>
+            </Form.Group>
+          </Form>
+        </Panel>
 
-              <div className="col-6">
-                <Form.Button
-                  className="btn btn-custom btn-block"
-                  type="submit"
-                  disabled={this.props.auth.login.loading}
-                >
-                  {this.props.auth.login.loading ? <Loading /> : 'Próxima'}
-                </Form.Button>
-              </div>
-            </div>
-          </Form.Group>
-        </Form>
-      </Panel>
+        <div className="text-center">
+          <Link to="/recover-password" className="text-muted">
+            <Icon name="lock" className="m-r-10" />
+            Esqueci minha senha
+          </Link>
+        </div>
+      </Fragment>
     );
   }
 }

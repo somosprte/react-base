@@ -73,7 +73,7 @@ class Edit extends Component {
 
         <Panel>
           {this.props.users.detail.loading ? (
-            <Loading />
+            <Loading type="page" size="x-large" />
           ) : (
             <Form
               data={this.state.data}

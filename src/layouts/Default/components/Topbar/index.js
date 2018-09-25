@@ -3,13 +3,12 @@ import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Creators as AuthActions } from 'store/ducks/auth';
+import { Creators as AuthActions, Selectors as AuthSelectors } from 'store/ducks/auth';
 
 import { Icon, Dropdown } from 'components';
 
 import LogoSmall from 'assets/images/logo-sm.png';
 import Logo from 'assets/images/logo.png';
-import AvatarExample from 'assets/images/users/avatar-1.jpg';
 
 class Topbar extends Component {
   handleLogout = e => {
@@ -40,27 +39,30 @@ class Topbar extends Component {
                 </a>
               </li>
 
-              <li>
-                <Dropdown>
-                  <Dropdown.Button className="nav-link nav-user" key="button">
-                    <img src={AvatarExample} alt="user" className="rounded-circle" />
-                  </Dropdown.Button>
+              {!this.props.auth.user.loading && (
+                <li>
+                  <Dropdown>
+                    <Dropdown.Button className="nav-link nav-user" key="button">
+                      <img src={this.props.user.avatar} alt="user" className="rounded-circle m-r-5" />
+                      <span>{this.props.user.fullname}</span>
+                    </Dropdown.Button>
 
-                  <Dropdown.Menu key="menu">
-                    <Link to="/" className="dropdown-item">
-                      <Icon name="user" /> Meu Perfil
-                    </Link>
+                    <Dropdown.Menu key="menu">
+                      <Link to="/" className="dropdown-item">
+                        <Icon name="user" /> Meu Perfil
+                      </Link>
 
-                    <Link to="/users" className="dropdown-item">
-                      <Icon name="cog" /> Configurações
-                    </Link>
+                      <Link to="/users" className="dropdown-item">
+                        <Icon name="cog" /> Configurações
+                      </Link>
 
-                    <a href="" className="dropdown-item" onClick={this.handleLogout}>
-                      <Icon name="power-off" /> Logout
-                    </a>
-                  </Dropdown.Menu>
-                </Dropdown>
-              </li>
+                      <a href="" className="dropdown-item" onClick={this.handleLogout}>
+                        <Icon name="power-off" /> Logout
+                      </a>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </li>
+              )}
             </ul>
           </div>
 
@@ -71,9 +73,14 @@ class Topbar extends Component {
   }
 }
 
+const mapState = state => ({
+  auth: state.auth,
+  user: AuthSelectors.user(state),
+});
+
 const mapActions = dispatch => bindActionCreators(AuthActions, dispatch);
 
 export default connect(
-  null,
+  mapState,
   mapActions,
 )(Topbar);

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import queryString from 'query-string';
 import { Link } from 'react-router-dom';
 
@@ -36,41 +36,54 @@ class List extends Component {
           </div>
         </div>
 
-        <Panel>
-          {this.props.users.loading ? (
-            <Loading />
-          ) : (
-            <table className="table table-striped">
-              <thead>
-                <tr>
-                  <th />
-                  <th>Nome Completo</th>
-                  <th />
-                </tr>
-              </thead>
+        {!this.props.usersList.length && !this.props.users.loading ? (
+          <Panel>
+            <Panel.Title>Não encontramos</Panel.Title>
+            <p>Essa tela vai ser exibida apenas se a lista estiver vazia e se não estiver carregnado dados.</p>
+          </Panel>
+        ) : (
+          <Panel>
+            {!this.props.usersList.length && this.props.users.loading ? (
+              <Loading type="page" size="x-large" />
+            ) : (
+              <Fragment>
+                {this.props.users.loading && <Loading type="table" size="x-large" />}
 
-              <tbody>
-                {this.props.usersList.map(user => (
-                  <tr key={user.id}>
-                    <td width="30">
-                      <img src={user.avatar} alt={user.fullname} className="rounded-circle" width="30" />
-                    </td>
-                    <td>{user.fullname}</td>
-                    <td align="right">
-                      <Link to={`/users/${user.id}/edit`} className="btn btn-primary btn-sm m-r-5">
-                        Editar
-                      </Link>
+                <table className="table table-striped">
+                  <thead>
+                    <tr>
+                      <th />
+                      <th>Nome Completo</th>
+                      <th>Ativo</th>
+                      <th />
+                    </tr>
+                  </thead>
 
-                      <Button type="danger" className="btn-sm">
-                        Remover
-                      </Button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
-        </Panel>
+                  <tbody>
+                    {this.props.usersList.map(user => (
+                      <tr key={user.id}>
+                        <td width="30">
+                          <img src={user.avatar} alt={user.fullname} className="rounded-circle" width="30" />
+                        </td>
+                        <td>{user.fullname}</td>
+                        <td>{user.active ? 'Ativo' : 'Inativo'}</td>
+                        <td align="right">
+                          <Link to={`/users/${user.id}/edit`} className="btn btn-primary btn-sm m-r-5">
+                            Editar
+                          </Link>
+
+                          <Button type="danger" className="btn-sm">
+                            Remover
+                          </Button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </Fragment>
+            )}
+          </Panel>
+        )}
 
         <Pagination className="m-t-20" current={this.props.users.page} total={this.props.users.total} {...this.props} />
       </Page>

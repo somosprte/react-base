@@ -1,5 +1,25 @@
 .dropdown {
+  .nav-user {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      margin-right: 10px;
+    }
+
+    span {
+      color: $white;
+      font-size: 12px;
+      font-weight: 400;
+    }
+  }
+
   .dropdown-item {
+    font-weight: 300;
+    font-size: 12px;
+
     i {
       margin-right: 5px;
     }

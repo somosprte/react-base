@@ -1,0 +1,72 @@
+.form {
+  .form-image {
+    .input-image-preview {
+      margin-bottom: 20px;
+      background: $light;
+      padding: 10px;
+      text-align: center;
+
+      img {
+        max-width: 400px;
+        max-height: 200px;
+      }
+    }
+
+    .input-image {
+      width: 0.1px;
+      height: 0.1px;
+      opacity: 0;
+      overflow: hidden;
+      position: absolute;
+      z-index: -1;
+
+      & + label {
+        max-width: 80%;
+        font-size: 1.25rem;
+        font-weight: 700;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        cursor: pointer;
+        display: inline-block;
+        overflow: hidden;
+        padding: 0;
+      }
+    }
+
+    .input-avatar {
+      .input-avatar-label {
+        position: relative;
+
+        .input-avatar-overlay {
+          background: transparent;
+          border-radius: 75px;
+          box-shadow: 0 0 0 31px $white;
+          outline: 31px solid $white !important;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 1;
+          overflow: hidden;
+        }
+      }
+
+      .input-avatar-preview {
+        background: $light;
+        height: 150px;
+        width: 150px;
+        border-radius: 75px;
+        display: block;
+        position: relative;
+        overflow: hidden;
+
+        img {
+          max-width: 100%;
+          height: 100%;
+          border-radius: 75px;
+        }
+      }
+    }
+  }
+}

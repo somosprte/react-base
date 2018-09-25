@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import Button from './Button';
 import Menu from './Menu';
@@ -39,9 +40,11 @@ class Dropdown extends Component {
           {this.renderComponent('Button')}
         </a>
 
-        <div className={`dropdown-menu dropdown-menu-right ${this.state.open ? 'show' : ''}`}>
-          {this.renderComponent('Menu')}
-        </div>
+        <ReactCSSTransitionGroup transitionName="fade" transitionEnterTimeout={150} transitionLeaveTimeout={150}>
+          {this.state.open && (
+            <div className={`dropdown-menu dropdown-menu-right show`}>{this.renderComponent('Menu')}</div>
+          )}
+        </ReactCSSTransitionGroup>
       </div>
     );
   }

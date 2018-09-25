@@ -43,6 +43,14 @@ class Navbar extends Component {
                       <li>
                         <Link to="/examples/icons">Icones</Link>
                       </li>
+
+                      <li>
+                        <Link to="/examples/components">Componentes</Link>
+                      </li>
+
+                       <li>
+                        <Link to="/examples/teste">teste</Link>
+                      </li>
                     </ul>
                   </li>
                 </ul>

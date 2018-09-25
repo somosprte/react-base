@@ -1,3 +1,5 @@
+import { createSelector } from 'reselect';
+
 export const Types = {
   LOGIN_REQUEST: 'auth/LOGIN_REQUEST',
   LOGIN_SUCCESS: 'auth/LOGIN_SUCCESS',
@@ -10,6 +12,14 @@ export const Types = {
   GET_USER_REQUEST: 'auth/GET_USER_REQUEST',
   GET_USER_SUCCESS: 'auth/GET_USER_SUCCESS',
   GET_USER_FAILURE: 'auth/GET_USER_FAILURE',
+
+  REGISTER_REQUEST: 'auth/REGISTER_REQUEST',
+  REGISTER_SUCCESS: 'auth/REGISTER_SUCCESS',
+  REGISTER_FAILURE: 'auth/REGISTER_FAILURE',
+
+  RECOVER_PASSWORD_REQUEST: 'auth/RECOVER_PASSWORD_REQUEST',
+  RECOVER_PASSWORD_SUCCESS: 'auth/RECOVER_PASSWORD_SUCCESS',
+  RECOVER_PASSWORD_FAILURE: 'auth/RECOVER_PASSWORD_FAILURE',
 };
 
 const initialState = {
@@ -23,6 +33,14 @@ const initialState = {
 
   user: {
     data: {},
+    loading: false,
+  },
+
+  register: {
+    loading: false,
+  },
+
+  recover: {
     loading: false,
   },
 };
@@ -102,6 +120,54 @@ export default function auth(state = initialState, action) {
           loading: false,
         },
       };
+    case Types.REGISTER_REQUEST:
+      return {
+        ...state,
+        register: {
+          ...state.register,
+          loading: true,
+        },
+      };
+    case Types.REGISTER_SUCCESS:
+      return {
+        ...state,
+        register: {
+          ...state.register,
+          loading: false,
+        },
+      };
+    case Types.REGISTER_FAILURE:
+      return {
+        ...state,
+        register: {
+          ...state.register,
+          loading: false,
+        },
+      };
+    case Types.RECOVER_PASSWORD_REQUEST:
+      return {
+        ...state,
+        recover: {
+          ...state.recover,
+          loading: true,
+        },
+      };
+    case Types.RECOVER_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        recover: {
+          ...state.recover,
+          loading: false,
+        },
+      };
+    case Types.RECOVER_PASSWORD_FAILURE:
+      return {
+        ...state,
+        recover: {
+          ...state.recover,
+          loading: false,
+        },
+      };
     default:
       return state;
   }
@@ -146,4 +212,40 @@ export const Creators = {
   logoutFailure: () => ({
     type: Types.LOGOUT_FAILURE,
   }),
+
+  registerRequest: data => ({
+    type: Types.REGISTER_REQUEST,
+    payload: { data },
+  }),
+
+  registerSuccess: () => ({
+    type: Types.REGISTER_SUCCESS,
+  }),
+
+  registerFailure: () => ({
+    type: Types.REGISTER_FAILURE,
+  }),
+
+  recoverPasswordRequest: data => ({
+    type: Types.RECOVER_PASSWORD_REQUEST,
+    payload: { data },
+  }),
+
+  recoverPasswordSuccess: () => ({
+    type: Types.RECOVER_PASSWORD_SUCCESS,
+  }),
+
+  recoverPasswordFailure: () => ({
+    type: Types.RECOVER_PASSWORD_FAILURE,
+  }),
+};
+
+export const Selectors = {
+  user: createSelector(
+    state => state.auth.user.data,
+    user => ({
+      ...user,
+      fullname: `${user.first_name} ${user.last_name}`,
+    }),
+  ),
 };
